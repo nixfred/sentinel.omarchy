@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "nixfred.sentinel",
+  "name": "Sentinel",
+  "version": "1.0.0",
+  "author": "nixfred",
+  "license": "MIT",
+  "description": "Systemd and journal watchdog. A shield on the bar goes green when no unit has failed, red with a count when one has, and amber on a journal error burst. The panel lists failed system and user units with Restart and Logs buttons, the next 10 timers counting down, the err/crit rate since boot, the noisiest sources and services that have been auto-restarted. Read-only except the buttons. Local, no network.",
+  "kinds": ["service", "bar-widget"],
+  "entryPoints": {
+    "service": "Service.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Sentinel",
+    "description": "Failed systemd units and journal error bursts. Click for the watch panel.",
+    "category": "System",
+    "aliases": ["sentinel", "systemd", "journal", "failed", "units", "timers", "watchdog"],
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": { "refreshSec": 30, "showRate": false },
+    "schema": [
+      { "key": "refreshSec", "type": "integer", "label": "Refresh interval (seconds)",
+        "description": "How often systemctl and the journal are read. One poll takes under a second.",
+        "min": 10, "max": 600, "defaultValue": 30 },
+      { "key": "showRate", "type": "boolean", "label": "Show the error rate",
+        "description": "Adds the err+ lines in the last hour beside the shield.", "defaultValue": false }
+    ]
+  },
+  "repository": "https://github.com/nixfred/sentinel.omarchy",
+  "homepage": "https://nixfred.com"
+}
